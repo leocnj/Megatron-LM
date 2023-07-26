@@ -776,7 +776,7 @@ class ParallelAttention(MegatronModule):
             q, k, v = [rearrange(x, 's b ... -> b s ...').contiguous()
                        for x in (query_layer, key_layer, value_layer)]
             if not self.sequence_parallel:
-                with tensor_parallel.get_cuda_rng_tracker().fork():
+                with mpu.get_cuda_rng_tracker().fork():
                     context_layer = self.core_attention_flash(q, k, v)
             else:
                 context_layer = self.core_attention_flash(q, k, v)
