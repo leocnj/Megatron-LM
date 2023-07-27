@@ -276,7 +276,7 @@ def validate_args(args, defaults={}):
         if args.decoder_seq_length is not None:
             assert args.max_position_embeddings >= args.decoder_seq_length
     else:
-        assert args.max_position_embeddings is None
+        assert args.max_position_embeddings is not None
         
     if args.lr is not None:
         assert args.min_lr <= args.lr
