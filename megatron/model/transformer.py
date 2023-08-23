@@ -45,17 +45,15 @@ except ImportError:
 try:
     from flash_attn.flash_attn_interface import flash_attn_unpadded_func
 except ImportError:
-    flash_attn_unpadded_func = None
+    try: # FA_V2 changed to flash_attn_varlen_func
+        from flash_attn.flash_attn_interface import flash_attn_varlen_func as flash_attn_unpadded_func
+    except ImportError:
+        flash_attn_unpadded_func = None
 
 try:
     from einops import rearrange
 except ImportError:
     rearrange = None
-
-try:
-    from flash_attn.flash_attn_interface import flash_attn_unpadded_func
-except ImportError:
-    flash_attn_unpadded_func = None
 
 
 """ We use the following notation throughout this file:
